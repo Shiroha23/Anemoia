@@ -1,0 +1,14 @@
+{
+  "item.anemoia.crazy_gear": "Crazy Gear",
+  "tooltip.anemoia.crazy_gear": "\u00A77Right-click while holding to adjust game difficulty",
+  "message.anemoia.difficulty_changed": "Game difficulty changed to: %s",
+  "item.anemoia.universal_press": "Universal Press",
+  "item.anemoia.black_soul": "Black Soul",
+  "effect.anemoia.phase": "Phase",
+  "item.minecraft.potion.effect.phase": "Potion of Phase",
+  "item.minecraft.splash_potion.effect.phase": "Splash Potion of Phase",
+  "item.minecraft.lingering_potion.effect.phase": "Lingering Potion of Phase",
+  "item.minecraft.tipped_arrow.effect.phase": "Arrow of Phase",
+  "itemGroup.anemoia": "Anemoia"
+}
+

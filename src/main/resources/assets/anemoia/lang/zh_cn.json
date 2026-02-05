@@ -1,0 +1,18 @@
+{
+  "item.anemoia.crazy_gear": "疯狂的齿轮",
+  "tooltip.anemoia.crazy_gear": "\u00A77手持右键调整游戏难度",
+  "message.anemoia.difficulty_changed": "游戏难度已切换为: %s",
+  "item.anemoia.universal_press": "通用压印模板",
+  "item.anemoia.black_soul": "黑之魂",
+  "effect.anemoia.phase": "相位",
+  "item.minecraft.potion.effect.phase": "相位药水",
+  "item.minecraft.potion.effect.long_phase": "相位药水",
+  "item.minecraft.splash_potion.effect.phase": "喷溅型相位药水",
+  "item.minecraft.splash_potion.effect.long_phase": "喷溅型相位药水",
+  "item.minecraft.lingering_potion.effect.phase": "滞留型相位药水",
+  "item.minecraft.lingering_potion.effect.long_phase": "滞留型相位药水",
+  "item.minecraft.tipped_arrow.effect.phase": "相位之箭",
+  "item.minecraft.tipped_arrow.effect.long_phase": "相位之箭",
+  "itemGroup.anemoia": "Anemoia"
+}
+
