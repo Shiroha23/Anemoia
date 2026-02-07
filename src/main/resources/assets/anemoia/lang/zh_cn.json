@@ -14,6 +14,15 @@
   "entity.anemoia.cat_projectile": "彩虹猫猫",
   "message.anemoia.meowmere_sound_enabled": "彩虹猫之刃音效：开",
   "message.anemoia.meowmere_sound_disabled": "彩虹猫之刃音效：关",
+  "effect.anemoia.phase": "相位",
+  "item.minecraft.potion.effect.phase": "相位药水",
+  "item.minecraft.potion.effect.long_phase": "相位药水",
+  "item.minecraft.splash_potion.effect.phase": "喷溅型相位药水",
+  "item.minecraft.splash_potion.effect.long_phase": "喷溅型相位药水",
+  "item.minecraft.lingering_potion.effect.phase": "滞留型相位药水",
+  "item.minecraft.lingering_potion.effect.long_phase": "滞留型相位药水",
+  "item.minecraft.tipped_arrow.effect.phase": "相位之箭",
+  "item.minecraft.tipped_arrow.effect.long_phase": "相位之箭",
   "itemGroup.anemoia": "Anemoia"
 }
 

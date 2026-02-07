@@ -4,17 +4,27 @@ import com.mojang.logging.LogUtils;
 import com.shiroha23.anemoia.meowmere.MeowmereContent;
 import com.shiroha23.anemoia.meowmere.entity.CatProjectile;
 import com.shiroha23.anemoia.meowmere.item.MeowmereSword;
+import com.shiroha23.anemoia.effect.PhaseEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.brewing.BrewingRecipe;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -43,6 +53,12 @@ public class Anemoia {
     
     // Create a Deferred Register to hold Items which will all be registered under the "anemoia" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+
+    // Create a Deferred Register to hold Mob Effects which will all be registered under the "anemoia" namespace
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
+
+    // Create a Deferred Register to hold Potions which will all be registered under the "anemoia" namespace
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, MODID);
 
     // Create a Deferred Register to hold Entities which will all be registered under the "anemoia" namespace
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
@@ -85,6 +101,13 @@ public class Anemoia {
     // Register the Meowmere particle types
     public static final RegistryObject<SimpleParticleType> RAINBOW = PARTICLE_TYPES.register("rainbow", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> PLAYER_RAINBOW = PARTICLE_TYPES.register("player_rainbow", () -> new SimpleParticleType(false));
+
+    // Register the Phase effect and potion
+    public static final RegistryObject<MobEffect> PHASE = EFFECTS.register("phase", PhaseEffect::new);
+    public static final RegistryObject<Potion> PHASE_POTION = POTIONS.register("phase",
+        () -> new Potion(new MobEffectInstance(PHASE.get(), 20 * 60 * 3)));
+    public static final RegistryObject<Potion> LONG_PHASE_POTION = POTIONS.register("long_phase",
+        () -> new Potion(new MobEffectInstance(PHASE.get(), 20 * 60 * 8)));
     
     // Register the Creative Mode Tab
     public static final RegistryObject<CreativeModeTab> ANEMOIA_TAB = CREATIVE_MODE_TABS.register("anemoia_tab", 
@@ -97,6 +120,8 @@ public class Anemoia {
                 output.accept(UNIVERSAL_PRESS.get());
                 output.accept(BLACK_SOUL.get());
                 output.accept(MEOWMERE.get());
+                output.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), PHASE_POTION.get()));
+                output.accept(PotionUtils.setPotion(new ItemStack(Items.POTION), LONG_PHASE_POTION.get()));
             })
             .build());
 
@@ -108,6 +133,12 @@ public class Anemoia {
 
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
+
+        // Register the Deferred Register to the mod event bus so effects get registered
+        EFFECTS.register(modEventBus);
+
+        // Register the Deferred Register to the mod event bus so potions get registered
+        POTIONS.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so entities get registered
         ENTITIES.register(modEventBus);
@@ -129,6 +160,18 @@ public class Anemoia {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
         AnemoiaNetwork.register();
+
+        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new BrewingRecipe(
+            Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)),
+            Ingredient.of(Items.ENDER_PEARL),
+            PotionUtils.setPotion(new ItemStack(Items.POTION), PHASE_POTION.get())
+        )));
+
+        event.enqueueWork(() -> BrewingRecipeRegistry.addRecipe(new BrewingRecipe(
+            Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), PHASE_POTION.get())),
+            Ingredient.of(Items.REDSTONE),
+            PotionUtils.setPotion(new ItemStack(Items.POTION), LONG_PHASE_POTION.get())
+        )));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

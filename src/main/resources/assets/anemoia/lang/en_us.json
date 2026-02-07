@@ -14,6 +14,11 @@
   "entity.anemoia.cat_projectile": "Rainbow Cat",
   "message.anemoia.meowmere_sound_enabled": "Meowmere sound: ON",
   "message.anemoia.meowmere_sound_disabled": "Meowmere sound: OFF",
+  "effect.anemoia.phase": "Phase",
+  "item.minecraft.potion.effect.phase": "Potion of Phase",
+  "item.minecraft.splash_potion.effect.phase": "Splash Potion of Phase",
+  "item.minecraft.lingering_potion.effect.phase": "Lingering Potion of Phase",
+  "item.minecraft.tipped_arrow.effect.phase": "Arrow of Phase",
   "itemGroup.anemoia": "Anemoia"
 }
 
